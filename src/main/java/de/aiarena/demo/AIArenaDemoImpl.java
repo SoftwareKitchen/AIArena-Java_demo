@@ -32,7 +32,7 @@ public class AIArenaDemoImpl {
         }
         System.out.println("Authentication token required:");
         try {
-            var token = "KUmVDuGLS1b2";
+            var token = "your token goes here";
             client.authenticate(token);
         }catch(Exception ex){
             System.out.println("Error reading token / connecting "+ex);
