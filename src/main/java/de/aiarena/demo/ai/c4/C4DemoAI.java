@@ -13,6 +13,7 @@ public class C4DemoAI implements AI {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final ObjectMapper mapper;
     private AICommandSink acs;
+    private String matchId = "???";
 
     @Autowired
     public C4DemoAI(ObjectMapper mapper){
@@ -31,6 +32,7 @@ public class C4DemoAI implements AI {
             switch(preParsed.type){
                 case "game-update":
                     var parsedMessage = mapper.readValue(message, ConnectFourMessages.ConnectFourGameUpdate.class);
+                    matchId = parsedMessage.gi.match;
                     if(parsedMessage.activePlayer != null && parsedMessage.slot != null && parsedMessage.activePlayer.equals(parsedMessage.slot)){
                         theActualAIMethod(parsedMessage.state);
                     }
@@ -68,7 +70,7 @@ public class C4DemoAI implements AI {
         }
 
         var move = new ConnectFourMessages.ConnectFourMove(targetColumn);
-        var wrapped = new CommonMessages.GameAction(move);
+        var wrapped = new CommonMessages.GameAction(move, matchId);
         try {
             acs.sendCommand(mapper.writeValueAsString(wrapped));
         }catch(Exception ex){

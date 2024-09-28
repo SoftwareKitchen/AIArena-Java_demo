@@ -46,9 +46,11 @@ public class CommonMessages {
     public static class GameAction{
         public final String action = "action";
         public final Object payload;
+        public final String match;
 
-        public GameAction(Object payload){
+        public GameAction(Object payload, String match){
             this.payload = payload;
+            this.match = match;
         }
     }
 }

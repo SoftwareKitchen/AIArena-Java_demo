@@ -1,5 +1,7 @@
 package de.aiarena.demo.ai.c4;
 
+import de.aiarena.demo.messages.CommonMessages;
+
 import java.util.List;
 
 public class ConnectFourMessages {
@@ -10,6 +12,7 @@ public class ConnectFourMessages {
         public ConnectFourPayload state;
         public Integer slot;
         public Integer activePlayer;
+        public CommonMessages.AIArenaMatchIdentifier gi;
     }
 
     public static class ConnectFourMove{
